@@ -96,6 +96,18 @@
     [self.delegate swipeToHide:self didUpdatePercentHiddenInteractively:interactive];
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    CGFloat height = scrollView.contentSize.height;
+    CGFloat contentYoffset = scrollView.contentOffset.y;
+    CGFloat distanceFromTop = height - scrollView.bounds.size.height;
+    
+    if (contentYoffset == distanceFromTop) {
+        
+        [self _setPercentHidden:0.0 interactive:NO];
+    }
+}
+
 @end
 
 @implementation AFSwipeToHide(Delegate)
